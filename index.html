@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Application de vente en ligne" />
+    <meta name="author" content="Leïla Diallo" />
+    <meta name="keywords" content="makeup, France, skincare" />
+    <meta name="robots" content="index,follow" />
+    <title>Cult Beauty</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script
+      src="https://kit.fontawesome.com/1b1fa6fbda.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <main x-data="inscription">
+      <h1>Inscription au formulaire :</h1>
+      <form
+        class="form"
+        x-on:submit="submitHandler"
+        aria-labelledby="form-title"
+      >
+        <section class="form__fields">
+          <template x-for="(field,index) in fields">
+            <article>
+              <label :for="field.name" :aria-label="field.placeholder"></label>
+              <section>
+                <i
+                  :class="'fa-solid' + (field.name == 'email' ? ' fa-envelope' : ' fa-lock')"
+                  aria-hidden="true"
+                ></i>
+                <input
+                  class="input"
+                  :id="field.name"
+                  :type="field.type ? field.type : 'text'"
+                  :placeholder="field.placeholder"
+                  :aria-required="true"
+                />
+              </section>
+            </article>
+          </template>
+        </section>
+        <section class="form__buttons">
+          <button class="button" type="submit">Valider</button>
+          <button class="button" type="reset">Réinitialiser</button>
+        </section>
+      </form>
+      <a href="login.html" class="button">Déjà inscrit(e) ? Cliquez ici</a>
+      <template x-teleport="body">
+        <div
+          class="popup"
+          role="dialog"
+          x-show="showPopup"
+          x-transition.duration.1000ms
+        >
+          <p x-text="popupMessage"></p>
+        </div>
+      </template>
+    </main>
+    <script src="main.js" type="module"></script>
+  </body>
+</html>
